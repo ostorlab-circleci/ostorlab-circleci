@@ -1,13 +1,18 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  Scan mobile apps for outdated dependencies, hardcoded secrets, privacy leakages, and insecure code (Signup at ostorlab.co).
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    ostorlab-circleci: oussamaessaji/ostorlab-circleci@1.0.1
   workflows:
     use-my-orb:
       jobs:
-        - <orb-name>/<job-name>
+        - ostorlab-circleci/ostorlab:
+            ostorlab_api_key: "API_KEY"
+            scan_profile: "fast_scan"
+            asset_type: "android-apk"
+            scan_title: "test"
+            target: "files/app.apk"
+            break_on_risk_rating: "HIGH"
+            max_wait_minutes: 5
+            extra: "--test-credentials-login test_login --test-credentials-password test_pass"

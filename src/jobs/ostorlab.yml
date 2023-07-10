@@ -1,0 +1,51 @@
+description: Run a scan based on the user input params
+
+parameters:
+  ostorlab_api_key:
+    description: Ostorlab API key
+    type: string
+  scan_profile:
+    description: The scan profile
+    type: string
+  asset_type:
+    description: Type of asset to scan. (['android-apk', 'android-aab', 'ios-ipa'])
+    type: string
+  scan_title:
+    description: The scan title
+    type: string
+  target:
+    description: Path to file .apk|.ios file.
+    type: string
+  break_on_risk_rating:
+    description: Wait for the scan results and force the action to fail if the scan risk rating is equal or higher this value. (['HIGH', 'MEDIUM', 'LOW','POTENTIALLY])
+    type: string
+  max_wait_minutes:
+    description: Specifies the maximum number of minutes to wait for scan results.
+    type: integer
+  extra:
+    description: Extra args to be passed to Ostorlab CLI to create a scan, common case is setting test credentials.
+    type: string
+
+docker:
+  - image: cimg/python:3.10.0
+
+steps:
+  - checkout
+  - run:
+      name: Install ostorlab
+      command: pip install ostorlab
+  - run:
+      environment:
+        OSTORLAB_API_KEY: <<parameters.ostorlab_api_key>>
+        SCAN_PROFILE: <<parameters.scan_profile>>
+        ASSET_TYPE: <<parameters.asset_type>>
+        SCAN_TITLE: <<parameters.scan_title>>
+        TARGET: <<parameters.target>>
+        BREAK_ON_RISK_RATING: <<parameters.break_on_risk_rating>>
+        MAX_WAIT_MINUTES: <<parameters.max_wait_minutes>>
+        EXTRA: <<parameters.extra>>
+      name: Run a scan
+      command: <<include(scripts/scan.sh)>>
+  - run:
+      name: Scan Id
+      command: echo ${SCAN_ID}
