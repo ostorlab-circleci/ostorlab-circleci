@@ -4,5 +4,4 @@ description: >
   Scan mobile apps for outdated dependencies, hardcoded secrets, privacy leakages, and insecure code (Signup at ostorlab.co).
 
 display:
-  home_url: "https://app.circleci.com/pipelines/github/oussamaessaji/ostorlab-circleci"
-  source_url: "https://github.com/oussamaessaji/ostorlab-circleci"
+  source_url: "https://github.com/ostorlab-circleci/ostorlab-circleci"
