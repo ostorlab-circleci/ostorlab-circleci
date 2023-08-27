@@ -23,7 +23,7 @@ parameters:
     description: Specifies the maximum number of minutes to wait for scan results.
     type: integer
   extra:
-    description: Extra args to be passed to Ostorlab CLI to create a scan, common case is setting test credentials.
+    description: Extra args to be passed to Ostorlab CLI to create a scan, common case is setting test credentials, or specifying SBOM files for scanning .
     type: string
 
 docker:
