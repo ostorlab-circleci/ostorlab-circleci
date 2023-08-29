@@ -15,4 +15,4 @@ usage:
             target: "files/app.apk"
             break_on_risk_rating: "HIGH"
             max_wait_minutes: 5
-            extra: "--test-credentials-login test_login --test-credentials-password test_pass"
+            extra: --test-credentials-login=test_login --test-credentials-password=test_pass --sbom=package-lock.json
