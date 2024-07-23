@@ -25,6 +25,7 @@ parameters:
   extra:
     description: Extra args are to be passed to Ostorlab CLI to create a scan, the common case is setting test credentials or specifying SBOM files for scanning.
     type: string
+    default: ""
 
 docker:
   - image: cimg/python:3.10.0
