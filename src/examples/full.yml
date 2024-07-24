@@ -1,0 +1,18 @@
+description: >
+  Start a full scan on the target asset and wait for the scan to finish. also, the action will fail if the scan risk rating is equal or higher this value.
+usage:
+  version: 2.1
+  orbs:
+    ostorlab: ostorlab-circleci/ostorlab@1.2.0
+  workflows:
+    use-my-orb:
+      jobs:
+        - ostorlab/ostorlab:
+            ostorlab_api_key: "API_KEY"
+            scan_profile: "fast_scan"
+            asset_type: "android-apk"
+            scan_title: "test"
+            target: "files/app.apk"
+            break_on_risk_rating: "HIGH"
+            max_wait_minutes: 120 # By default, the action will wait for 120 minutes for the scan results. change it if you want to wait for a specific time.
+            extra: "--test-credentials-login=test_login --test-credentials-password=test_pass --sbom=package-lock.json"

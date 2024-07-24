@@ -1,0 +1,15 @@
+description: >
+  Start a fast scan on the target asset without waiting for the scan to finish. The scan results will be available in the Ostorlab platform.
+usage:
+  version: 2.1
+  orbs:
+    ostorlab: ostorlab-circleci/ostorlab@1.2.0
+  workflows:
+    use-my-orb:
+      jobs:
+        - ostorlab/ostorlab:
+            ostorlab_api_key: "API_KEY"
+            scan_profile: "fast_scan"
+            asset_type: "android-apk"
+            scan_title: "test"
+            target: "files/app.apk"

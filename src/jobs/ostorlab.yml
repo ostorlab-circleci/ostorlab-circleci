@@ -13,19 +13,22 @@ parameters:
   scan_title:
     description: The scan title
     type: string
+    default: "Scan from CircleCI"
   target:
     description: Path to file .apk|.ios file.
     type: string
   break_on_risk_rating:
     description: Wait for the scan results and force the action to fail if the scan risk rating is equal or higher this value. (['HIGH', 'MEDIUM', 'LOW','POTENTIALLY])
     type: string
+    default: "" # By default, the action will not fail based on the risk rating. it will just create a scan in the Ostorlab platform.
   max_wait_minutes:
     description: Specifies the maximum number of minutes to wait for scan results.
     type: integer
+    default: 120 # By default, the action will wait for 120 minutes for the scan results.
   extra:
     description: Extra args are to be passed to Ostorlab CLI to create a scan, the common case is setting test credentials or specifying SBOM files for scanning.
     type: string
-    default: ""
+    default: "" # By default, no extra args are passed to the Ostorlab CLI.
 
 docker:
   - image: cimg/python:3.10.0
@@ -47,6 +50,7 @@ steps:
         EXTRA: <<parameters.extra>>
       name: Run a scan
       command: <<include(scripts/scan.sh)>>
+      no_output_timeout: 24h # To avoid the job from being killed by CircleCI after 10 minutes of inactivity while waiting for the scan results.
   - run:
       name: Scan Id
       command: echo ${SCAN_ID}
