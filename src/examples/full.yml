@@ -14,5 +14,5 @@ usage:
             scan_title: "test"
             target: "files/app.apk"
             break_on_risk_rating: "HIGH"
-            max_wait_minutes: 120 # By default, the action will wait for 120 minutes for the scan results. change it if you want to wait for a specific time.
+            max_wait_minutes: 120
             extra: "--test-credentials-login=test_login --test-credentials-password=test_pass --sbom=package-lock.json"
